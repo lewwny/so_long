@@ -6,11 +6,39 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:39 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 17:57:42 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 19:05:06 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+void	load_collectible(t_game *game, int u)
+{
+	int		i;
+	char	*filename;
+	char	*number;
+	char	*tmp;
+
+	i = 0;
+	game->num_collectible_frame = 11;
+	game->img_collectible = malloc(sizeof(void *) * 11);
+	if (!game->img_collectible)
+		malloc_error(game->map);
+	while (i < game->num_collectible_frame)
+	{
+		number = ft_itoa(i + 1);
+		tmp = ft_strjoin("./img/", number);
+		free(number);
+		filename = ft_strjoin(tmp, ".xpm");
+		free(tmp);
+		game->img_collectible[i] = mlx_xpm_file_to_image(game->mlx,
+				filename, &u, &u);
+		free(filename);
+		if (!game->img_collectible[i])
+			error_load(game);
+		i++;
+	}
+}
 
 void	load_images(t_game *game)
 {
@@ -22,19 +50,14 @@ void	load_images(t_game *game)
 			"./img/sprite-player.xpm", &u, &u);
 	game->img_floor = mlx_xpm_file_to_image(game->mlx,
 			"./img/tile-floor.xpm", &u, &u);
-	game->img_collectible = mlx_xpm_file_to_image(game->mlx,
-			"./img/1.xpm", &u, &u);
 	game->img_exit = mlx_xpm_file_to_image(game->mlx,
 			"./img/chest1.xpm", &u, &u);
 	game->img_exit2 = mlx_xpm_file_to_image(game->mlx,
 			"./img/chest2.xpm", &u, &u);
 	if (!game->img_wall || !game->img_player || !game->img_floor
-		|| !game->img_collectible || !game->img_exit || !game->img_exit2)
-	{
-		ft_printf("Error\nUne image n'a pas chargée\n");
-		free_map(game->map);
-		exit(1);
-	}
+		|| !game->img_exit || !game->img_exit2)
+		error_load(game);
+	load_collectible(game, u);
 }
 
 static void	collectible_player(t_game *game, int *x, int *y)
@@ -44,7 +67,7 @@ static void	collectible_player(t_game *game, int *x, int *y)
 			game->win, game->img_player, *x * TILE_SIZE, *y * TILE_SIZE);
 	else if (game->map[*y][*x] == 'C')
 		mlx_put_image_to_window(game->mlx,
-			game->win, game->img_collectible,
+			game->win, game->img_collectible[game->current_frame],
 			*x * TILE_SIZE, *y * TILE_SIZE);
 	else if (game->map[*y][*x] == 'e')
 		mlx_put_image_to_window(game->mlx,

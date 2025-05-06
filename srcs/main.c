@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:32:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 17:50:35 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 19:19:42 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ static void	init_game(t_game *game)
 	render_map(game);
 }
 
+int	update_animation(t_game *game)
+{
+	static int	counter = 0;
+
+	counter++;
+	if (counter >= 300)
+	{
+		game->current_frame++;
+		if (game->current_frame >= game->num_collectible_frame)
+			game->current_frame = 0;
+		render_map(game);
+		counter = 0;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	game;
@@ -45,10 +61,12 @@ int	main(int argc, char **argv)
 	arg_error(argc, argv[1]);
 	game.map = read_file(argv[1]);
 	parse_map(&game);
+	game.current_frame = 0;
 	init_game(&game);
 	mlx_key_hook(game.win, handle_key, &game);
-	mlx_loop(game.mlx);
+	mlx_loop_hook(game.mlx, update_animation, &game);
 	mlx_hook(game.win, 17, 0, close_game, &game);
-	free_map(game.map);
+	mlx_loop(game.mlx);
+	destroy_game(&game);
 	return (0);
 }
