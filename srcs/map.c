@@ -6,11 +6,21 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:57:22 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 10:31:15 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 17:35:22 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
+
+static void	fill_tmp(int *i, char **map, char **tmp, int *count)
+{
+	*i = 0;
+	while (*i < *count)
+	{
+		tmp[*i] = map[*i];
+		(*i)++;
+	}
+}
 
 static char	**read_file_to_map(int fd)
 {
@@ -27,13 +37,8 @@ static char	**read_file_to_map(int fd)
 	{
 		tmp = malloc(sizeof(char *) * (count + 2));
 		if (!tmp)
-			malloc_error();
-		i = 0;
-		while (i < count)
-		{
-			tmp[i] = map[i];
-			i++;
-		}
+			malloc_error(NULL);
+		fill_tmp(&i, map, tmp, &count);
 		tmp[count] = line;
 		tmp[count + 1] = NULL;
 		if (map)

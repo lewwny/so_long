@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:31 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 10:48:29 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 18:06:27 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,38 @@
 # include <fcntl.h>
 # include "../minilibx/mlx.h"
 
+# define TILE_SIZE 64
+
+typedef struct s_game
+{
+	void	*mlx;
+	void	*win;
+	void	*img_wall;
+	void	*img_floor;
+	void	*img_player;
+	void	*img_exit;
+	void	*img_exit2;
+	void	*img_collectible;
+	char	**map;
+	int		collectible_left;
+}	t_game;
+
 void	arg_error(int argc, char *file);
 void	wrong_file(void);
-void	malloc_error(void);
+void	malloc_error(char **map);
 void	free_map(char **map);
-void	parse_map(char **map);
+void	parse_map(t_game *game);
 void	invalid_map(char **map);
+void	parse_map_char(t_game *game);
+void	test_path(char **map);
+void	error_mlx(t_game *game);
+void	render_map(t_game *game);
+void	load_images(t_game *game);
+void	count_move(void);
+void	success_game(t_game *game);
+void	change_exit(char **map);
+
+int		handle_key(int key, t_game *game);
 
 char	**read_file(char *file);
 

@@ -6,87 +6,61 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:36:45 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 10:52:58 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 17:14:17 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-static int	check_collectible(char **map)
+static int	parse_form(char **map)
 {
-	int	count;
-	int	x;
-	int	y;
+	int	size_x;
+	int	i;
 
-	count = 0;
-	y = 0;
-	while (map[y])
+	i = 0;
+	size_x = ft_strlen(map[i]);
+	while (map[i])
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map [y][x++] == 'C')
-				count++;
-		}
-		y++;
+		if (map[i][size_x - 1] != '\n')
+			return (0);
+		i++;
 	}
-	if (count > 0)
-		return (1);
-	return (0);
+	return (1);
 }
 
-static int	check_exit(char **map)
+static int	parse_wall(char **map)
 {
-	int	count;
-	int	x;
-	int	y;
+	int	size_x;
+	int	size_y;
+	int	i;
 
-	count = 0;
-	y = 0;
-	while (map[y])
+	i = 0;
+	size_y = 0;
+	size_x = ft_strlen(map[0]) - 1;
+	while (map[size_y])
+		size_y++;
+	while (i < size_x - 1)
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map [y][x++] == 'E')
-				count++;
-		}
-		y++;
+		if (map[0][i] != '1' || map[size_y - 1][i] != '1')
+			return (0);
+		i++;
 	}
-	if (count == 1)
-		return (1);
-	return (0);
+	i = 0;
+	while (i < size_y - 1)
+	{
+		if (map[i][0] != '1' || map[i][size_x - 1] != '1')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-static int	check_player(char **map)
+void	parse_map(t_game *game)
 {
-	int	count;
-	int	x;
-	int	y;
-
-	count = 0;
-	y = 0;
-	while (map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map [y][x++] == 'P')
-				count++;
-		}
-		y++;
-	}
-	if (count == 1)
-		return (1);
-	return (0);
-}
-
-void	parse_map(char **map)
-{
-	if (!check_collectible(map))
-		invalid_map(map);
-	if (!check_exit(map))
-		invalid_map(map);
-	if (!check_player(map))
-		invalid_map(map);
+	parse_map_char(game);
+	if (!parse_form(game->map))
+		invalid_map(game->map);
+	if (!parse_wall(game->map))
+		invalid_map(game->map);
+	test_path(game->map);
 }

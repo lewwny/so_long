@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:53:28 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 10:47:46 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/06 12:01:13 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	invalid_map(char **map)
 	exit(1);
 }
 
-void	malloc_error(void)
+void	malloc_error(char **map)
 {
+	if (map)
+		free_map(map);
 	ft_printf("Error\nProblème d'allocation mémoire\n");
 	exit(1);
 }

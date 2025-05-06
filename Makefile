@@ -6,13 +6,15 @@
 #    By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 19:14:45 by lenygarcia        #+#    #+#              #
-#    Updated: 2025/05/06 10:46:36 by lenygarcia       ###   ########.fr        #
+#    Updated: 2025/05/06 18:06:40 by lenygarcia       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
 CFLAGS		= -Wall -Wextra -Werror -g -Ilibft/includes -Iincludes -Iminilibx
-SRCS		= srcs/main.c srcs/error.c srcs/map.c srcs/free_func.c srcs/parse_map.c
+SRCS		= srcs/main.c srcs/error.c srcs/map.c srcs/free_func.c srcs/parse_map.c \
+		srcs/parse_map_char.c srcs/test_path.c srcs/error2.c srcs/player_move.c \
+		srcs/create_map.c srcs/gameplay_utils.c
 OBJS		= $(SRCS:.c=.o)
 NAME		= so_long
 LIBFT_PATH	= ./libft
