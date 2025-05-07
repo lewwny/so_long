@@ -6,7 +6,7 @@
 #    By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 19:14:45 by lenygarcia        #+#    #+#              #
-#    Updated: 2025/05/07 11:14:39 by lenygarcia       ###   ########.fr        #
+#    Updated: 2025/05/07 15:49:43 by lenygarcia       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,9 @@ $(LIBFT):
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus: CFLAGS += -D BONUS=1
+bonus: all
 
 clean:
 	@rm -f $(OBJS)

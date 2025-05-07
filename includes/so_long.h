@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:31 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 11:39:35 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 15:46:12 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@
 # include "../libft/libft.h"
 # include <fcntl.h>
 # include "../minilibx/mlx.h"
+
+# ifndef BONUS
+#  define BONUS 0
+# endif
 
 # define TILE_SIZE 64
 

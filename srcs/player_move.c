@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:30 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 11:34:26 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 15:47:20 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	find_player(char **map, int *y, int *x)
 static void	take_collectible(t_game *game, int new_y, int new_x)
 {
 	game->map[new_y][new_x] = '0';
-	system("afplay sounds/coin.wav &");
+	if (BONUS)
+		system("afplay sounds/coin.wav &");
 	if (--game->collectible_left == 0)
 		change_exit(game->map);
 }
