@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 16:48:30 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 18:06:49 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 11:34:26 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ static void	find_player(char **map, int *y, int *x)
 	}
 }
 
+//	system("aplay sounds/coin.wav &"); [LINUX]
+static void	take_collectible(t_game *game, int new_y, int new_x)
+{
+	game->map[new_y][new_x] = '0';
+	system("afplay sounds/coin.wav &");
+	if (--game->collectible_left == 0)
+		change_exit(game->map);
+}
+
 static void	move_player(t_game *game, int next_y, int next_x)
 {
 	int	player_x;
@@ -52,13 +61,11 @@ static void	move_player(t_game *game, int next_y, int next_x)
 		success_game(game);
 		return ;
 	}
+	if (game->map[new_y][new_x] == 'M')
+		loose_game(game);
 	if (game->map[new_y][new_x] == 'C')
-	{
-		game->map[new_y][new_x] = '0';
-		if (--game->collectible_left == 0)
-			change_exit(game->map);
-	}
-	count_move();
+		take_collectible(game, new_y, new_x);
+	count_move(game);
 	game->map[player_y][player_x] = '0';
 	game->map[new_y][new_x] = 'P';
 	render_map(game);
@@ -76,7 +83,7 @@ int	handle_key(int key, t_game *game)
 		move_player(game, 0, 1);
 	if (key == 53)
 	{
-		free_map(game->map);
+		destroy_game(game);
 		exit(0);
 	}
 	return (0);

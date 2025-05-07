@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:31 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 19:20:08 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 11:39:35 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,14 @@ typedef struct s_game
 	void	*img_player;
 	void	*img_exit;
 	void	*img_exit2;
+	void	*img_enemy;
 	void	**img_collectible;
 	char	**map;
 	int		collectible_left;
 	int		num_collectible_frame;
 	int		current_frame;
+	int		move;
+	int		enemy;
 }	t_game;
 
 void	arg_error(int argc, char *file);
@@ -46,14 +49,17 @@ void	test_path(char **map);
 void	error_mlx(t_game *game);
 void	render_map(t_game *game);
 void	load_images(t_game *game);
-void	count_move(void);
+void	count_move(t_game *game);
 void	success_game(t_game *game);
 void	change_exit(char **map);
 void	error_load(t_game *game);
 void	malloc_error2(t_game *game);
 void	destroy_game(t_game *game);
+void	move_enemy(t_game *game, int *direction);
+void	loose_game(t_game *game);
 
 int		handle_key(int key, t_game *game);
+int		check_enemy(char **map);
 
 char	**read_file(char *file);
 

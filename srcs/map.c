@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:57:22 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 17:35:22 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 10:51:43 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ char	**read_file(char *file)
 	if (fd == -1)
 		wrong_file();
 	map = read_file_to_map(fd);
+	if (!map)
+	{
+		ft_printf("Error\nMauvaise lecture du fichier\n");
+		exit(1);
+	}
 	close(fd);
 	return (map);
 }

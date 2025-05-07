@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 17:37:39 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 19:05:06 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 10:54:24 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,15 @@ void	load_images(t_game *game)
 			"./img/chest1.xpm", &u, &u);
 	game->img_exit2 = mlx_xpm_file_to_image(game->mlx,
 			"./img/chest2.xpm", &u, &u);
+	game->img_enemy = mlx_xpm_file_to_image(game->mlx,
+			"./img/sprite-enemy.xpm", &u, &u);
 	if (!game->img_wall || !game->img_player || !game->img_floor
-		|| !game->img_exit || !game->img_exit2)
+		|| !game->img_exit || !game->img_exit2 || !game->img_enemy)
 		error_load(game);
 	load_collectible(game, u);
 }
 
-static void	collectible_player(t_game *game, int *x, int *y)
+static void	collectible_player_enemy(t_game *game, int *x, int *y)
 {
 	if (game->map[*y][*x] == 'P')
 		mlx_put_image_to_window(game->mlx,
@@ -72,6 +74,20 @@ static void	collectible_player(t_game *game, int *x, int *y)
 	else if (game->map[*y][*x] == 'e')
 		mlx_put_image_to_window(game->mlx,
 			game->win, game->img_exit2, *x * TILE_SIZE, *y * TILE_SIZE);
+	else if (game->map[*y][*x] == 'M')
+		mlx_put_image_to_window(game->mlx,
+			game->win, game->img_enemy, *x * TILE_SIZE, *y * TILE_SIZE);
+}
+
+static void	put_count(t_game *game)
+{
+	char	*tmp;
+
+	tmp = ft_itoa(game->move);
+	if (!tmp)
+		malloc_error2(game);
+	mlx_string_put(game->mlx, game->win, 17, 40, 0xFFFFFF, tmp);
+	free(tmp);
 }
 
 void	render_map(t_game *game)
@@ -94,9 +110,10 @@ void	render_map(t_game *game)
 				mlx_put_image_to_window(game->mlx,
 					game->win, game->img_exit, x * TILE_SIZE, y * TILE_SIZE);
 			else
-				collectible_player(game, &x, &y);
+				collectible_player_enemy(game, &x, &y);
 			x++;
 		}
 		y ++;
 	}
+	put_count(game);
 }

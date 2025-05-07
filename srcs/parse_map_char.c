@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:57:01 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 17:19:36 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 11:41:20 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ static int	check_char(char **map)
 		{
 			if (map [y][x] != 'P' && map [y][x] != '0' &&
 				map [y][x] != 'E' && map [y][x] != '1' &&
-				map [y][x] != 'C' && map [y][x] != '\n')
+				map [y][x] != 'C' && map [y][x] != '\n' &&
+				map[y][x] != 'M')
 				return (0);
 			x++;
 		}
@@ -111,5 +112,8 @@ void	parse_map_char(t_game *game)
 	if (!check_player(game->map))
 		invalid_map(game->map);
 	if (!check_char(game->map))
+		invalid_map(game->map);
+	game->enemy = check_enemy(game->map);
+	if (game->enemy > 1)
 		invalid_map(game->map);
 }

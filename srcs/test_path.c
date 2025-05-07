@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 11:52:49 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 12:25:06 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/07 12:04:30 by lenygarcia       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	flood_fill(char **map, int x, int y)
 {
 	if (x < 0 || y < 0 || !map[y] || map[y][x] == '\0')
 		return ;
-	if (map[y][x] == '1' || map[y][x] == 'V')
+	if (map[y][x] == '1' || map[y][x] == 'V' || map[y][x] == 'M')
 		return ;
 	map[y][x] = 'V';
 	flood_fill(map, x - 1, y);
