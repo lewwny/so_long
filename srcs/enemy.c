@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 11:03:38 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 15:46:44 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 11:58:49 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,9 @@ int	check_enemy(char **map)
 	return (count);
 }
 
-//system("aplay sounds/lose.wav &");
 void	loose_game(t_game *game)
 {
 	ft_printf("Tu as perdu, piqué par le hérisson !\n");
-	if (BONUS)
-		system("afplay sounds/lose.wav &");
 	destroy_game(game);
 }
 

@@ -18,7 +18,10 @@ void	free_map(char **map)
 
 	i = 0;
 	while (map[i])
-		free(map[i++]);
+	{
+		free(map[i]);
+		i++;
+	}
 	free(map);
 }
 

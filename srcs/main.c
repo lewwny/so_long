@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:32:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 11:48:07 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 14:08:35 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	update_animation(t_game *game)
 
 	counter++;
 	counter_enemy++;
-	if (counter >= 300)
+	if (counter >= 2000)
 	{
 		game->current_frame++;
 		if (game->current_frame >= game->num_collectible_frame)
@@ -54,7 +54,7 @@ int	update_animation(t_game *game)
 		render_map(game);
 		counter = 0;
 	}
-	if (counter_enemy >= 9500)
+	if (counter_enemy >= 10000)
 	{
 		if (game->enemy)
 			move_enemy(game, &enemy);

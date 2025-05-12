@@ -6,7 +6,7 @@
 #    By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 19:14:45 by lenygarcia        #+#    #+#              #
-#    Updated: 2025/05/07 15:49:43 by lenygarcia       ###   ########.fr        #
+#    Updated: 2025/05/12 11:57:46 by lengarci         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ NAME		= so_long
 LIBFT_PATH	= ./libft
 LIBFT		= $(LIBFT_PATH)/libft.a
 MLX_DIR		= ./minilibx
-MLX		= -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
+MLX		= -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lbsd
 
 all: $(NAME)
 
@@ -32,9 +32,6 @@ $(LIBFT):
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
-
-bonus: CFLAGS += -D BONUS=1
-bonus: all
 
 clean:
 	@rm -f $(OBJS)

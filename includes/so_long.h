@@ -17,10 +17,6 @@
 # include <fcntl.h>
 # include "../minilibx/mlx.h"
 
-# ifndef BONUS
-#  define BONUS 0
-# endif
-
 # define TILE_SIZE 64
 
 typedef struct s_game

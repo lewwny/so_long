@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 18:05:00 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 15:47:03 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 11:58:33 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,10 @@ void	count_move(t_game *game)
 	ft_printf("Mouvement numéro : %d !\n", game->move);
 }
 
-//system("aplay sounds/victory.wav &");
 void	success_game(t_game *game)
 {
 	count_move(game);
 	ft_printf("Tu as reussi !\n");
-	if (BONUS)
-		system("afplay sounds/victory.wav &");
 	destroy_game(game);
 	exit(0);
 }
