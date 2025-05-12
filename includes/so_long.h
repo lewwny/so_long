@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:15:31 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/07 15:46:12 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 16:17:11 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	malloc_error2(t_game *game);
 void	destroy_game(t_game *game);
 void	move_enemy(t_game *game, int *direction);
 void	loose_game(t_game *game);
+void	destroy_error(t_game *game);
 
 int		handle_key(int key, t_game *game);
 int		check_enemy(char **map);

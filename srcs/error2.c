@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:57:05 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 19:14:04 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 16:30:10 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	error_mlx(t_game *game)
 void	error_load(t_game *game)
 {
 	ft_printf("Error\nImage load fail\n");
-	free_map(game->map);
-	if (game->img_collectible)
-		free(game->img_collectible);
+	destroy_error(game);
 	exit(1);
 }
 
@@ -35,4 +33,39 @@ void	malloc_error2(t_game *game)
 	if (game->img_collectible)
 		free(game->img_collectible);
 	exit(1);
+}
+
+static void	destroy_collectible(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->num_collectible_frame)
+	{
+		mlx_destroy_image(game->mlx, game->img_collectible[i]);
+		i++;
+	}
+	free(game->img_collectible);
+}
+
+void	destroy_error(t_game *game)
+{
+	if (game->img_wall)
+		mlx_destroy_image(game->mlx, game->img_wall);
+	if (game->img_floor)
+		mlx_destroy_image(game->mlx, game->img_floor);
+	if (game->img_player)
+		mlx_destroy_image(game->mlx, game->img_player);
+	if (game->img_exit)
+		mlx_destroy_image(game->mlx, game->img_exit);
+	if (game->img_exit2)
+		mlx_destroy_image(game->mlx, game->img_exit2);
+	if (game->img_enemy)
+		mlx_destroy_image(game->mlx, game->img_enemy);
+	if (game->img_collectible)
+		destroy_collectible(game);
+	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
+	free(game->mlx);
+	free_map(game->map);
 }

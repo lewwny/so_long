@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 10:34:08 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/06 19:19:29 by lenygarcia       ###   ########.fr       */
+/*   Updated: 2025/05/12 16:25:07 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	destroy_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->img_player);
 	mlx_destroy_image(game->mlx, game->img_exit);
 	mlx_destroy_image(game->mlx, game->img_exit2);
+	if (game->img_enemy)
+		mlx_destroy_image(game->mlx, game->img_enemy);
 	i = 0;
 	while (i < game->num_collectible_frame)
 	{
@@ -42,6 +44,8 @@ void	destroy_game(t_game *game)
 	}
 	free(game->img_collectible);
 	mlx_destroy_window(game->mlx, game->win);
+	mlx_destroy_display(game->mlx);
 	free_map(game->map);
+	free(game->mlx);
 	exit(0);
 }
