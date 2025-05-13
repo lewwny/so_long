@@ -6,7 +6,7 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 14:57:05 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/12 16:30:10 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/13 07:45:20 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ void	error_load(t_game *game)
 void	malloc_error2(t_game *game)
 {
 	ft_printf("Error\nProblème d'allocation mémoire\n");
-	free_map(game->map);
-	if (game->img_collectible)
-		free(game->img_collectible);
+	destroy_error(game);
 	exit(1);
 }
 
