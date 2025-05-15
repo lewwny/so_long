@@ -6,11 +6,11 @@
 /*   By: lenygarcia <marvin@42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:32:27 by lenygarcia        #+#    #+#             */
-/*   Updated: 2025/05/12 16:27:34 by lengarci         ###   ########.fr       */
+/*   Updated: 2025/05/15 08:31:54 by lengarci         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../includes/so_long.h>
+#include "../includes/so_long.h"
 
 int	close_game(t_game *game)
 {
@@ -65,7 +65,7 @@ int	update_animation(t_game *game)
 
 	counter++;
 	counter_enemy++;
-	if (counter >= 2000)
+	if (counter >= 4000)
 	{
 		game->current_frame++;
 		if (game->current_frame >= game->num_collectible_frame)
@@ -73,7 +73,7 @@ int	update_animation(t_game *game)
 		render_map(game);
 		counter = 0;
 	}
-	if (counter_enemy >= 10000)
+	if (counter_enemy >= 20000)
 	{
 		if (game->enemy)
 			move_enemy(game, &enemy);
